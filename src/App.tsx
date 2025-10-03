@@ -1,15 +1,19 @@
 import React from 'react';
-import { TonConnectUIProvider, TonConnectButton } from '@tonconnect/ui';
+import { useTonConnectUI } from '@tonconnect/ui-react';
 
-function App() {
+const App: React.FC = () => {
+  const [tonConnectUI, setOptions] = useTonConnectUI();
+
+  const openModal = () => {
+    tonConnectUI.openWalletModal();
+  };
+
   return (
-    <TonConnectUIProvider manifestUrl="https://cpxmajor.gtrsadikbd.shop/tonconnect-manifest.json">
-      <div style={{ textAlign: 'center', marginTop: '50px' }}>
-        <h1>CPXMajor TON Connect DApp</h1>
-        <TonConnectButton />
-      </div>
-    </TonConnectUIProvider>
+    <div>
+      <h1>CPXMajor TON Connect</h1>
+      <button onClick={openModal}>Connect Wallet</button>
+    </div>
   );
-}
+};
 
 export default App;
