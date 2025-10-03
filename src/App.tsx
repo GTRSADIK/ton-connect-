@@ -2,7 +2,7 @@ import React from 'react';
 import { TonConnectUI } from '@tonconnect/ui';
 
 const tonConnectUI = new TonConnectUI({
-  manifestUrl: 'https://cpxmajorton.vercel.app/public/tonconnect-manifest.json'
+  manifestUrl: 'https://raw.githubusercontent.com/GTRSADIK/ton-connect-/main/public/tonconnect-manifest.json'
 });
 
 const App: React.FC = () => {
