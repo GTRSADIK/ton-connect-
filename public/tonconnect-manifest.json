@@ -1,13 +1,13 @@
 {
-  "name": "CPXMajor TON Connect",
+  "name": "CPX MAJOR",
   "description": "Connect your TON wallet",
   "icons": [
     {
-      "src": "https://cpxmajor.gtrsadikbd.shop/icon.png",
+      "src": "https://raw.githubusercontent.com/GTRSADIK/ton-connect-/main/public/icon.png",
       "sizes": "256x256",
       "type": "image/png"
     }
   ],
-  "start_url": "https://cpxmajor.gtrsadikbd.shop",
+  "start_url": "https://cpxmajorton.vercel.app/",
   "display": "standalone"
 }
