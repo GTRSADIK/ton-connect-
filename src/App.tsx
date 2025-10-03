@@ -1,17 +1,31 @@
 import React from 'react';
-import { useTonConnectUI } from '@tonconnect/ui-react';
+import { TonConnectUI } from '@tonconnect/ui';
+
+const tonConnectUI = new TonConnectUI({
+  manifestUrl: 'https://cpxmajor.gtrsadikbd.shop/tonconnect-manifest.json'
+});
 
 const App: React.FC = () => {
-  const [tonConnectUI, setOptions] = useTonConnectUI();
-
-  const openModal = () => {
-    tonConnectUI.openWalletModal();
+  const connectWallet = async () => {
+    try {
+      const wallet = await tonConnectUI.connect();
+      alert('✅ Wallet connected: ' + wallet!.account);
+      console.log(wallet);
+    } catch (err) {
+      console.error('Connection failed:', err);
+      alert('❌ Connection failed');
+    }
   };
 
   return (
-    <div>
-      <h1>CPXMajor TON Connect</h1>
-      <button onClick={openModal}>Connect Wallet</button>
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      <h1>CPXMajor TON Connect DApp</h1>
+      <button
+        style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}
+        onClick={connectWallet}
+      >
+        Connect Wallet
+      </button>
     </div>
   );
 };
