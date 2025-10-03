@@ -1,9 +1,8 @@
-// src/App.tsx
 import React from 'react';
 import { TonConnectUI } from '@tonconnect/ui';
 
 const tonConnectUI = new TonConnectUI({
-  manifestUrl: 'https://cpxmajor.gtrsadikbd.shop/tonconnect-manifest.json'
+  manifestUrl: 'https://cpxmajorton.vercel.app/public/tonconnect-manifest.json'
 });
 
 const App: React.FC = () => {
@@ -20,7 +19,7 @@ const App: React.FC = () => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>CPXMajor TON Connect DApp</h1>
+      <h1>CPX MAJOR TON Connect</h1>
       <button
         style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}
         onClick={connectWallet}
