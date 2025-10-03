@@ -1,0 +1,13 @@
+{
+  "name": "CPXMajor TON Connect",
+  "description": "Connect your TON wallet",
+  "icons": [
+    {
+      "src": "https://cpxmajor.gtrsadikbd.shop/icon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "https://cpxmajor.gtrsadikbd.shop",
+  "display": "standalone"
+}
