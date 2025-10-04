@@ -1,33 +1,30 @@
-import React from 'react';
-import { TonConnectUI } from '@tonconnect/ui';
+import { useEffect } from "react";
 
-const tonConnectUI = new TonConnectUI({
-  manifestUrl: 'https://raw.githubusercontent.com/GTRSADIK/ton-connect-/main/public/tonconnect-manifest.json'
-});
+declare global {
+  interface Window {
+    TonWeb: any;
+    TonConnect: any;
+  }
+}
 
-const App: React.FC = () => {
-  const connectWallet = async () => {
-    try {
-      const wallet = await tonConnectUI.connect();
-      alert('✅ Wallet connected: ' + wallet!.account);
-      console.log(wallet);
-    } catch (err) {
-      console.error('Connection failed:', err);
-      alert('❌ Connection failed');
-    }
-  };
+function App() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/tonweb@0.0.42/dist/tonweb.min.js";
+    script.async = true;
+    script.onload = () => {
+      console.log("TonWeb loaded", window.TonWeb);
 
-  return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>CPX MAJOR TON Connect</h1>
-      <button
-        style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}
-        onClick={connectWallet}
-      >
-        Connect Wallet
-      </button>
-    </div>
-  );
-};
+      const manifestUrl = "https://raw.githubusercontent.com/GTRSADIK/ton-connect-/main/public/tonconnect-manifest.json";
+
+      // এখানে TonConnect logic implement করতে হবে
+      // window.TonConnect.init(manifestUrl) বা similar
+      console.log("Using TonConnect Manifest from:", manifestUrl);
+    };
+    document.body.appendChild(script);
+  }, []);
+
+  return <div>GTR BUMS TonConnect App</div>;
+}
 
 export default App;
