@@ -1,30 +1,52 @@
-import { useEffect } from "react";
+import React, { useState } from "react";
+import { TonConnect } from "@tonconnect/sdk";
 
-declare global {
-  interface Window {
-    TonWeb: any;
-    TonConnect: any;
+const manifestUrl = "https://raw.githubusercontent.com/GTRSADIK/ton-connect-/refs/heads/main/public/tonconnect-manifest.json";
+const connector = new TonConnect({ manifestUrl });
+
+export default function App() {
+  const [wallet, setWallet] = useState<any>(null);
+
+  async function connectWallet() {
+    try {
+      const walletConnection = await connector.connectWallet();
+      setWallet(walletConnection);
+      alert("✅ Wallet connected successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("❌ Connection failed!");
+    }
   }
-}
 
-function App() {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/tonweb@0.0.42/dist/tonweb.min.js";
-    script.async = true;
-    script.onload = () => {
-      console.log("TonWeb loaded", window.TonWeb);
-
-      const manifestUrl = "https://raw.githubusercontent.com/GTRSADIK/ton-connect-/main/public/tonconnect-manifest.json";
-
-      // এখানে TonConnect logic implement করতে হবে
-      // window.TonConnect.init(manifestUrl) বা similar
-      console.log("Using TonConnect Manifest from:", manifestUrl);
-    };
-    document.body.appendChild(script);
-  }, []);
-
-  return <div>GTR BUMS TonConnect App</div>;
-}
-
-export default App;
+  return (
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "100vh",
+      background: "#0f172a",
+      color: "white"
+    }}>
+      <h1>TON Connect Demo</h1>
+      {!wallet ? (
+        <button
+          onClick={connectWallet}
+          style={{
+            background: "#0891b2",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            padding: "12px 24px",
+            cursor: "pointer",
+            fontSize: "16px"
+          }}
+        >
+          Connect Wallet
+        </button>
+      ) : (
+        <p>Wallet Connected ✅</p>
+      )}
+    </div>
+  );
+        }
