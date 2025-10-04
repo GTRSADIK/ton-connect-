@@ -1,52 +1,50 @@
 import React, { useState } from "react";
-import { TonConnect } from "@tonconnect/sdk";
+import { TonConnectButton, TonConnectUI } from "@tonconnect/ui-react";
 
-const manifestUrl = "https://raw.githubusercontent.com/GTRSADIK/ton-connect-/refs/heads/main/public/tonconnect-manifest.json";
-const connector = new TonConnect({ manifestUrl });
+const App: React.FC = () => {
+  const [walletInfo, setWalletInfo] = useState<any>(null);
 
-export default function App() {
-  const [wallet, setWallet] = useState<any>(null);
-
-  async function connectWallet() {
+  const handleConnect = async () => {
     try {
-      const walletConnection = await connector.connectWallet();
-      setWallet(walletConnection);
-      alert("✅ Wallet connected successfully!");
-    } catch (err) {
-      console.error(err);
-      alert("❌ Connection failed!");
+      const tonConnectUI = new TonConnectUI({
+        manifestUrl: `${window.location.origin}/tonconnect-manifest.json`
+      });
+
+      const wallet = await tonConnectUI.connect();
+      setWalletInfo(wallet); // সংরক্ষণ কানেক্টেড ওয়ালেট ইনফো
+      console.log("Connected wallet:", wallet);
+    } catch (error) {
+      console.error("Connection failed:", error);
     }
-  }
+  };
 
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "100vh",
-      background: "#0f172a",
-      color: "white"
-    }}>
-      <h1>TON Connect Demo</h1>
-      {!wallet ? (
-        <button
-          onClick={connectWallet}
-          style={{
-            background: "#0891b2",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            padding: "12px 24px",
-            cursor: "pointer",
-            fontSize: "16px"
-          }}
-        >
-          Connect Wallet
-        </button>
-      ) : (
-        <p>Wallet Connected ✅</p>
+    <div style={{ padding: "20px", color: "#fff", background: "#3c2917", minHeight: "100vh" }}>
+      <h1>Connect your TON Wallet</h1>
+
+      {/* UI React TonConnect Button */}
+      <TonConnectButton
+        manifestUrl={`${window.location.origin}/tonconnect-manifest.json`}
+        onConnect={(wallet) => setWalletInfo(wallet)}
+      />
+
+      {walletInfo && (
+        <div style={{ marginTop: "20px", padding: "10px", background: "#44280f", borderRadius: "10px" }}>
+          <h2>Wallet Connected!</h2>
+          <p>Address: {walletInfo.account.address}</p>
+          <p>Network: {walletInfo.account.network}</p>
+        </div>
       )}
+
+      {/* Custom Button (optional) */}
+      <button
+        style={{ marginTop: "20px", padding: "10px 20px", background: "#ffb443", border: "none", borderRadius: "8px", cursor: "pointer" }}
+        onClick={handleConnect}
+      >
+        Connect via Popup
+      </button>
     </div>
   );
-        }
+};
+
+export default App;
