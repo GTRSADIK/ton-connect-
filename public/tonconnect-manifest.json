@@ -1,13 +1,10 @@
 {
-  "name": "CPX MAJOR",
-  "description": "Connect your TON wallet",
-  "icons": [
-    {
-      "src": "https://raw.githubusercontent.com/GTRSADIK/ton-connect-/main/public/icon.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    }
-  ],
-  "start_url": "https://cpxmajorton.vercel.app/",
-  "display": "standalone"
+  "id": "gtr-bums-ton-connect",
+  "name": "GTR BUMS App",
+  "icon": "https://raw.githubusercontent.com/GTRSADIK/ton-connect-/main/public/icon.png",
+  "version": "1.0.0",
+  "description": "TonConnect integration for GTR BUMS App",
+  "url": "https://cpxmajorton.vercel.app/",
+  "chains": ["mainnet"],
+  "redirectUrl": "https://cpxmajorton.vercel.app/"
 }
